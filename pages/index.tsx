@@ -23,7 +23,6 @@ const BlogTitle = styled.h1`
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
-  color: red;
   text-align: center;
 `;
 
