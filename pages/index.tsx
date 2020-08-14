@@ -1,3 +1,4 @@
+import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import styled from "@emotion/styled";
 
@@ -26,9 +27,32 @@ const BlogTitle = styled.h1`
   text-align: center;
 `;
 
-const title: string = "Next.js + TypeScript";
+const List = styled.ul`
+  list-style: square;
+`;
 
-export default function Home() {
+const ListItem = styled.li`
+  padding: 10px;
+  text-transform: capitalize;
+  margin: 40px 0;
+  cursor: pointer;
+  color: #252525;
+
+  &:hover {
+    background: #f0f0f0;
+  }
+`;
+
+const PostTitle = styled.h2`
+  margin: 0;
+  font-size: 24px;
+`;
+
+const title: string = "My awesome blog";
+
+export default function Home({
+  posts,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Container>
       <Head>
@@ -38,7 +62,32 @@ export default function Home() {
 
       <Main>
         <BlogTitle className="title">{title}</BlogTitle>
+        <List>
+          {posts.map((post) => (
+            <ListItem key={post.id}>
+              <PostTitle>{post.title}</PostTitle>
+            </ListItem>
+          ))}
+        </List>
       </Main>
     </Container>
   );
 }
+
+type Post = {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+};
+
+export const getStaticProps = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const posts: Post[] = await res.json();
+
+  return {
+    props: {
+      posts,
+    },
+  };
+};
