@@ -1,4 +1,4 @@
-import { Article } from "../../components/Article";
+import { Article } from "@components/Article";
 import { useRouter } from "next/router";
 
 export default function Post() {
