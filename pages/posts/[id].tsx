@@ -1,26 +1,10 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { useRouter } from "next/router";
+import { InferGetStaticPropsType, GetStaticPropsContext } from "next";
 import { Article } from "@components/Article";
+import type { Post } from "../index";
 
-type Params = {
-  id: string;
-};
-
-type Post = {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-};
-
-interface Props {
-  post: Post;
-}
-
-export default function Post({ post }: Props) {
-  if (!post) {
-    return null;
-  }
+export default function BlogPost({
+  post,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const { title, body } = post;
 
   return (
@@ -31,7 +15,6 @@ export default function Post({ post }: Props) {
   );
 }
 
-// This function gets called at build time
 export const getStaticPaths = async () => {
   // Call an external API endpoint to get posts
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -46,22 +29,28 @@ export const getStaticPaths = async () => {
 };
 
 // This also gets called at build time
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps = async (context: GetStaticPropsContext) => {
   // params contains the post `id`.
   // If the route is like /posts/1, then params.id is 1
   const { params } = context;
-  if (!params) {
+  const emptyPost = {
+    title: "Post not found",
+    body: "",
+  };
+
+  if (!params?.id) {
     return {
-      props: {},
+      props: {
+        post: emptyPost,
+      },
     };
   }
 
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${params.id}`
   );
-  const post = await res.json();
+  const post: Post = await res.json();
 
-  // Pass post data to the page via props
   return {
     props: {
       post,
