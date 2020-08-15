@@ -2,6 +2,8 @@ import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import styled from "@emotion/styled";
 
+const title: string = "My awesome blog";
+
 const Container = styled.div`
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -26,8 +28,6 @@ const BlogTitle = styled.h1`
   font-size: 4rem;
   text-align: center;
 `;
-
-const title: string = "My awesome blog";
 
 const List = styled.ul`
   list-style: square;
@@ -73,7 +73,7 @@ export default function Home({
   );
 }
 
-type Post = {
+export type Post = {
   userId: number;
   id: number;
   title: string;
