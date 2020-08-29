@@ -2,9 +2,9 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
   GetStaticPaths,
-} from "next";
-import { Article } from "@components/Article";
-import type { Post } from "../index";
+} from 'next';
+import { Article, BlogpostImage } from '@components/Article';
+import type { Post } from '../index';
 
 export default function BlogPost({
   post,
@@ -12,13 +12,14 @@ export default function BlogPost({
   return (
     <Article>
       <h1>{post.title}</h1>
+      <BlogpostImage src='/harry_and_ginny.jpeg' alt='Two cute bunnies' />
       <p>{post.body}</p>
     </Article>
   );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
   const posts: Post[] = await res.json();
 
   const paths = posts.map((post) => ({
@@ -35,8 +36,8 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   const { params } = context;
 
   const emptyPost: Post = {
-    title: "Post not found",
-    body: "",
+    title: 'Post not found',
+    body: '',
     id: 0,
     userId: 0,
   };
