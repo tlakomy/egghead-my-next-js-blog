@@ -11,7 +11,7 @@ function Form() {
   return (
     <form name='feedback' method='post' data-netlify='true'>
       {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-      {/* <input type='hidden' name='form-name' value='feedback' /> */}
+      <input type='hidden' name='form-name' value='feedback' />
       <p>
         <label>
           Your name:
