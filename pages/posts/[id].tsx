@@ -7,6 +7,32 @@ import Head from 'next/head';
 import { Article, BlogpostImage } from '@components/Article';
 import type { Post } from '../index';
 
+function Form() {
+  return (
+    <form name='contact' method='post' data-netlify='true'>
+      {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
+      {/* <input type='hidden' name='form-name' value='contact' /> */}
+      <p>
+        <label>
+          Your name:
+          <br />
+          <input type='text' name='name' />
+        </label>
+      </p>
+      <p>
+        <label>
+          Feedback:
+          <br />
+          <textarea name='message' />
+        </label>
+      </p>
+      <p>
+        <button type='submit'>Send</button>
+      </p>
+    </form>
+  );
+}
+
 export default function BlogPost({
   post,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -20,6 +46,7 @@ export default function BlogPost({
       <h1>{title}</h1>
       <BlogpostImage src='/harry_and_ginny.jpeg' alt='Two cute bunnies' />
       <p>{body}</p>
+      <Form />
     </Article>
   );
 }
