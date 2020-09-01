@@ -9,9 +9,9 @@ import type { Post } from '../index';
 
 function Form() {
   return (
-    <form name='contact' method='post' data-netlify='true'>
+    <form name='feedback' method='post' data-netlify='true'>
       {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-      {/* <input type='hidden' name='form-name' value='contact' /> */}
+      {/* <input type='hidden' name='form-name' value='feedback' /> */}
       <p>
         <label>
           Your name:
