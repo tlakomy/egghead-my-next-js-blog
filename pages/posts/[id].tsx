@@ -5,7 +5,6 @@ import {
 } from 'next';
 import Head from 'next/head';
 import { Article, BlogpostImage } from '@components/Article';
-import { FeedbackForm } from '@components/FeedbackForm';
 import type { Post } from '../index';
 
 export default function BlogPost({
@@ -21,7 +20,6 @@ export default function BlogPost({
       <h1>{title}</h1>
       <BlogpostImage src='/harry_and_ginny.jpeg' alt='Two cute bunnies' />
       <p>{body}</p>
-      <FeedbackForm />
     </Article>
   );
 }

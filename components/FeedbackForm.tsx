@@ -1,5 +1,3 @@
-import styled from '@emotion/styled';
-
 function FeedbackForm() {
   return (
     <form name='feedback' method='post' data-netlify='true'>

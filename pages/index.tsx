@@ -1,9 +1,10 @@
-import Link from "next/link";
-import { InferGetStaticPropsType } from "next";
-import Head from "next/head";
-import styled from "@emotion/styled";
+import Link from 'next/link';
+import { InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
+import styled from '@emotion/styled';
+import { FeedbackForm } from '@components/FeedbackForm';
 
-const title: string = "My awesome blog";
+const title: string = 'My awesome blog';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -57,23 +58,24 @@ export default function Home({
     <Container>
       <Head>
         <title>My awesome blog</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <Main>
-        <BlogTitle className="title">{title}</BlogTitle>
-        <Link href="/about">
+        <BlogTitle className='title'>{title}</BlogTitle>
+        <Link href='/about'>
           <a>About this blog</a>
         </Link>
         <List>
           {posts.map((post) => (
-            <Link href="/posts/[id]" as={`/posts/${post.id}`} key={post.id}>
+            <Link href='/posts/[id]' as={`/posts/${post.id}`} key={post.id}>
               <ListItem>
                 <PostTitle>{post.title}</PostTitle>
               </ListItem>
             </Link>
           ))}
         </List>
+        <FeedbackForm />
       </Main>
     </Container>
   );
@@ -87,7 +89,7 @@ export type Post = {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
 
   const posts: Post[] = await res.json();
 
